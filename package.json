@@ -1,0 +1,14 @@
+{
+  "name": "ovo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "none",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
