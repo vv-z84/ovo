@@ -1,7 +1,10 @@
-const { parse, isBefore } = require('date-fns')
+const { parseISO, isBefore, isValid } = require('date-fns')
 
 const validateEventDate = (date) => {
-    const parsedDate = parse(date, new Date())
+    const parsedDate = parseISO(date)
+
+    if(!isValid(parsedDate))
+        return { error: true, value: date }
 
     if(isBefore(parsedDate, new Date()))
         return { error: true, value: date }
@@ -18,3 +21,4 @@ const makeAddEvent = (createEvent) => ({ title, date, description }) => {
 }
 
 module.exports.makeAddEvent = makeAddEvent
+module.exports.validateEventDate = validateEventDate
