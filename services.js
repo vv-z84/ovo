@@ -11,7 +11,7 @@ const validateEventDate = (date) => {
     return { error: false, value: date }
 }
 
-const makeAddEvent = (createEvent) => ({ title, date, description }) => {
+const makeAddEvent = (createEvent, validateEventDate) => ({ title, date, description }) => {
     const { error, value } = validateEventDate(date)
 
     if(error)
