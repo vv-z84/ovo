@@ -1,5 +1,7 @@
 module.exports = {
-    makeCreateEvent: (knex) => ({ title, date, description }) => {
-        return Promise.resolve({ id: 123, title, date, description })
+    makeCreateEvent: (db) => ({ title, date, description }) => {
+        return db('event')
+            .returning('id')
+            .insert({ title, at_date: date, description })
     }
 }
