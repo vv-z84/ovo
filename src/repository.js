@@ -3,5 +3,9 @@ module.exports = {
         return db('event')
             .returning('id')
             .insert({ title, at_date: date, description })
+    },
+    makeListEvents: (db) => () => {
+        return db('event')
+            .select()
     }
 }
