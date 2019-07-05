@@ -6,7 +6,7 @@ describe('validateEventDate()', () => {
         const today = format(new Date(), 'yyyy-MM-dd')
         const { error, value } = validateEventDate(today)
 
-        expect(error).toBeTruthy()
+        expect(error).toBe(true)
         expect(value).toBe(today)
     })
 
@@ -14,7 +14,7 @@ describe('validateEventDate()', () => {
         const date = '2018-01-01'
         const { error, value } = validateEventDate(date)
 
-        expect(error).toBeTruthy()
+        expect(error).toBe(true)
         expect(value).toBe(date)
     })
 
@@ -22,7 +22,7 @@ describe('validateEventDate()', () => {
         const date = '9876-54-32'
         const { error, value } = validateEventDate(date)
 
-        expect(error).toBeTruthy()
+        expect(error).toBe(true)
         expect(value).toBe(date)
     })
 })
