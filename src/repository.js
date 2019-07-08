@@ -1,8 +1,10 @@
 module.exports = {
-    makeCreateEvent: (db) => ({ title, date, description }) => {
-        return db('event')
-            .returning('id')
+    makeCreateEvent: (db) => async ({ title, date, description }) => {
+        const result = await db('event')
+            .returning(['id', 'title', 'at_date', 'description'])
             .insert({ title, at_date: date, description })
+
+        return result[0]
     },
     makeListEvents: (db) => () => {
         return db('event')
