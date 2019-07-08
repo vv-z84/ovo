@@ -44,9 +44,10 @@ describe('makeAddEvent()', () => {
             })
 
             const addEvent = makeAddEvent(createEventMock, validateEventDateMock)
+            const { error, value } = addEvent({ title: 'Teste', date: '2010-01-01', description: 'Testando'})
 
-            addEvent({ title: 'Teste', date: '2010-01-01', description: 'Testando'})
-            expect(createEventMock).toBeCalledWith({ title: 'Teste', date: '2010-01-01', description: 'Testando'})
+            expect(error).toBe(false)
+            expect(value.id).toBe(123)
         })
 
         it('should not call createEvent if the date is invalid', () => {
