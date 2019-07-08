@@ -5,10 +5,19 @@
   "author": "none",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "test": "jest",
+    "watch": "jest --watch"
+  },
   "devDependencies": {
-    "eslint": "^5.16.0"
+    "eslint": "~5.16.0",
+    "jest": "~24.8.0"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "@types/jest": "^24.0.15",
+    "date-fns": "^2.0.0",
+    "express": "~4.17.1",
+    "knex": "^0.18.0",
+    "pg": "7.11.0"
   }
 }
