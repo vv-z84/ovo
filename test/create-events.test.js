@@ -18,7 +18,7 @@ describe('makeCreateEvent()', () => {
             const event = { title: 'Teste', date: '2020-01-01', description: 'Testando' }
             const createdEvent = await createEvent(event)
         
-            expect(createdEvent[0]).toBe(1)
+            expect(createdEvent.id).toBe(1)
         })
     })
 })
