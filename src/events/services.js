@@ -24,5 +24,4 @@ const makeAddEvent = (createEvent, validateEventDate) => ({ title, date, descrip
         return { error: false, value: createdEvent }
 }
 
-module.exports.makeAddEvent = makeAddEvent
-module.exports.validateEventDate = validateEventDate
+module.exports = { validateEventDate, makeAddEvent }
