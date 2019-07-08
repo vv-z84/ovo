@@ -8,6 +8,7 @@ const validateEventDate = (date) => {
 
     if(isBefore(parsedDate, new Date()))
         return { error: true, value: date }
+        
     return { error: false, value: date }
 }
 
@@ -17,7 +18,10 @@ const makeAddEvent = (createEvent, validateEventDate) => ({ title, date, descrip
     if(error)
         return { error, value }
 
-    return createEvent({ title, date, description })
+    const createdEvent = createEvent({ title, date, description })
+
+    if(createdEvent)
+        return { error: false, value: createdEvent }
 }
 
 module.exports.makeAddEvent = makeAddEvent
