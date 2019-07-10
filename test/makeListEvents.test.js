@@ -8,7 +8,7 @@ describe('makeListEvents()', () => {
         expect(typeof listEvents).toBe('function')
     })
 
-    describe('createEvent()', () => {
+    describe('listEvents()', () => {
         beforeEach(async () => {
             await db('event').insert({ title: 'Um evento', at_date: '2050-01-30', description: 'Um evento de teste' })
         })
