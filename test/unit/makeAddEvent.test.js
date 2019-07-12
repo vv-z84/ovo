@@ -1,4 +1,4 @@
-const { makeAddEvent } = require('../src/events/services')
+const { makeAddEvent } = require('../../src/events/services')
 
 describe('makeAddEvent()', () => {
     it('should return a function', () => {
