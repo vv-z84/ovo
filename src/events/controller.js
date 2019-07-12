@@ -4,8 +4,8 @@ const getEvents = (findEvents) => async () => {
     return events
 }
 
-const getEventsFor = (listEvents) => async (day) => {
-    const events = await listEvents(day)
+const getEventsFor = (findTodayEvents) => async () => {
+    const events = await findTodayEvents()
     return events
 }
 
