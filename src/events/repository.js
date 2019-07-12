@@ -6,8 +6,13 @@ module.exports = {
 
         return result[0]
     },
-    makeListEvents: (db) => () => {
-        return db('event')
+    makeListEvents: (db) => async () => {
+        return await db('event')
             .select()
+    },
+    makeListEventsFor: (db) => async (day) => {
+        return await db('event')
+            .select()
+            .where('at_date', day)
     }
 }
