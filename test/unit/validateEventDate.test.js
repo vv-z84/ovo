@@ -1,5 +1,5 @@
 const { format } = require('date-fns')
-const { validateEventDate } = require('../src/events/services')
+const { validateEventDate } = require('../../src/events/services')
 
 describe('validateEventDate()', () => {
     it('should not accept today date', () => {
