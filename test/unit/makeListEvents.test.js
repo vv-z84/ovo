@@ -1,4 +1,4 @@
-const { makeListEvents } = require('../../src/events/repository')
+const { makeListEvents, makeListEventsFor } = require('../../src/events/repository')
 const db = require('../../db')
 
 describe('makeListEvents()', () => {
@@ -27,6 +27,32 @@ describe('makeListEvents()', () => {
             expect(events[0].at_date.getMonth()).toBe(0) // ?????
             expect(events[0].at_date.getFullYear()).toBe(2050)
             expect(events[0].description).toBe('Um evento de teste')
+        })
+    })
+})
+
+describe('makeListEventsFor()', () => {
+    describe('listEventsFor()', () => {
+        beforeEach(async () => {
+            await db('event').insert(
+                [{ title: 'Um evento', at_date: '2050-01-30', description: 'Um evento de teste' },
+                 { title: 'Outro evento', at_date: new Date(), description: 'Outro evento de teste' },])
+        })
+        afterEach(async () => {
+            await db('event').truncate()
+        })
+
+        it('should get a list with one event', async () => {
+            const listEventsFor = makeListEventsFor(db)
+            const events = await listEventsFor(new Date())
+
+            expect(Array.isArray(events)).toBe(true)
+            expect(events.length).toBe(1)
+            expect(events[0].title).toBe('Outro evento')
+            expect(events[0].at_date.getDate()).toBe((new Date()).getDate()) // ????
+            expect(events[0].at_date.getMonth()).toBe((new Date()).getMonth()) // ?????
+            expect(events[0].at_date.getFullYear()).toBe((new Date()).getFullYear())
+            expect(events[0].description).toBe('Outro evento de teste')
         })
     })
 })
