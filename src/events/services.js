@@ -24,4 +24,16 @@ const makeAddEvent = (createEvent, validateEventDate) => ({ title, date, descrip
         return { error: false, value: createdEvent }
 }
 
-module.exports = { validateEventDate, makeAddEvent }
+const makeFindTodayEvents = (listEventsFor) => async () => {
+    const todayEvents = await listEventsFor(new Date())
+    
+    return { error: false, value: todayEvents }
+}
+
+const makeFindEvents = (listEvents) => async () => {
+    const events = await listEvents()
+    
+    return { error: false, value: events }
+}
+
+module.exports = { validateEventDate, makeAddEvent, makeFindTodayEvents, makeFindEvents }
