@@ -1,4 +1,4 @@
-const App = require('express')()
+const { App } = require('./src/app')
 
 App.get('/', (req, res) => {
     res.send('ok')
