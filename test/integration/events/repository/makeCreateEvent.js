@@ -1,5 +1,5 @@
 const { makeCreateEvent } = require('../src/events/repository')
-const db = require('../db')
+const db = require('../../../..db')
 
 describe('makeCreateEvent()', () => {
     it('should return a function', () => {
