@@ -1,5 +1,5 @@
-const { makeListEvents, makeListEventsFor } = require('../../src/events/repository')
-const db = require('../../db')
+const { makeListEvents, makeListEventsFor } = require('../../../../src/events/repository')
+const db = require('../../../../db')
 
 describe('makeListEvents()', () => {
     it('should return a function', () => {
