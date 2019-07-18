@@ -2,7 +2,7 @@ const { App } = require('../../../src/app')
 const request = require('supertest')(App)
 const { seedEventsTable, clearEventsTable, db } = require('../../helpers')
 
-describe('GET /events', () => {
+describe.skip('GET /events', () => {
     beforeEach(async () => {
         await seedEventsTable()
 
