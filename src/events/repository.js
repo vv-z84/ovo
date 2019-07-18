@@ -14,5 +14,8 @@ module.exports = {
         return await db('event')
             .select()
             .where('at_date', day)
+    },
+    makeDeleteEvent: (db) => async (id) => {
+        return await db('event').where('id', id).delete()
     }
 }
