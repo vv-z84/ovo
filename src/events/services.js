@@ -12,13 +12,13 @@ const validateEventDate = (date) => {
     return { error: false, value: date }
 }
 
-const makeAddEvent = (createEvent, validateEventDate) => ({ title, date, description }) => {
+const makeAddEvent = (createEvent, validateEventDate) => async ({ title, date, description }) => {
     const { error, value } = validateEventDate(date)
 
     if(error)
         return { error, value }
 
-    const createdEvent = createEvent({ title, date, description })
+    const createdEvent = await createEvent({ title, date, description })
 
     if(createdEvent)
         return { error: false, value: createdEvent }
@@ -36,4 +36,13 @@ const makeFindEvents = (listEvents) => async () => {
     return { error: false, value: events }
 }
 
-module.exports = { validateEventDate, makeAddEvent, makeFindTodayEvents, makeFindEvents }
+const makeDeleteEvent = (deleteEvent) => async (id) => {
+    if(id === undefined || Number.isNaN(id))
+        return { error: true, value: null }
+        
+    const result = await deleteEvent(id)
+
+    return { error: false, value: result }
+}
+
+module.exports = { validateEventDate, makeAddEvent, makeFindTodayEvents, makeFindEvents, makeDeleteEvent }
