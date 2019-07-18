@@ -7,7 +7,7 @@ describe('makeAddEvent()', () => {
     })
 
     describe('addEvent()', () => {
-        it('should create an event when date is valid', () => {
+        it('should create an event when date is valid', async () => {
             const createEventMock = jest.fn(({ title, date, description }) => {
                 return { id: 123, title, date, description }
             })
@@ -17,7 +17,7 @@ describe('makeAddEvent()', () => {
             })
 
             const addEvent = makeAddEvent(createEventMock, validateEventDateMock)
-            const { error, value } = addEvent({ title: 'Teste', date: '2010-01-01', description: 'Testando'})
+            const { error, value } = await addEvent({ title: 'Teste', date: '2010-01-01', description: 'Testando'})
 
             expect(error).toBe(false)
             expect(value.id).toBe(123)
