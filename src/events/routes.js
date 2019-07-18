@@ -55,4 +55,18 @@ router.post('/events', (req, res, next) => {
         })
 })
 
+router.delete('/events/:id', (req, res, next) => {
+    const id = req.params.id
+
+    deleteEvent(id)
+        .then(result => {
+            const { error, value } = result
+
+            if(error)
+                next(error)
+
+            res.status(200).send()
+        })
+})
+
 module.exports = router
