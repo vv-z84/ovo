@@ -7,9 +7,9 @@
   "private": true,
   "scripts": {
     "test:unit": "jest --testMatch=**/test/unit/**/*.test.js",
-    "test:integration": "jest --testMatch=**/test/integration/**/*.test.js",
+    "test:integration": "jest --testMatch=**/test/integration/**/*.test.js --runInBand",
     "watch:unit": "jest --watch --testMatch=**/test/unit/**/*.test.js",
-    "watch:integration": "jest --watch --testMatch=**/test/integration/**/*.test.js"
+    "watch:integration": "jest --watch --testMatch=**/test/integration/**/*.test.js --runInBand"
   },
   "devDependencies": {
     "eslint": "~5.16.0",

@@ -1,6 +1,7 @@
 const { makeListEvents, makeListEventsFor } = require('../../../../src/events/repository')
 const db = require('../../../../db')
 
+afterAll(() => db.destroy())
 describe('makeListEvents()', () => {
     it('should return a function', () => {
         const listEvents = makeListEvents()
