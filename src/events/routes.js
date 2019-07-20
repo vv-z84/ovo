@@ -12,14 +12,11 @@ const {
     makeCreateEvent
 } = require('./repository')
 const database = require('../../db')
-const {
-    getEvents,
-    getEventsFor
-} = require('./controller')
 
 router.get('/events', (req, res, next) => {
     if(req.query.type && req.query.type === 'today') {
-        getEventsFor(makeFindTodayEvents(makeListEventsFor(database)))()
+        const findTodayEvents = makeFindTodayEvents(makeListEventsFor(database))
+        findTodayEvents()
             .then(result => {
                 const { error, value } = result
                 if(error)
@@ -29,7 +26,8 @@ router.get('/events', (req, res, next) => {
             })
     }
     else {
-        getEvents(makeFindEvents(makeListEvents(database)))()
+        const findEvents = makeFindEvents(makeListEvents(database))
+        findEvents()
             .then(result => {
                 const { error, value } = result
                 if(error)
