@@ -1,5 +1,6 @@
 const { makeCreateEvent } = require('../../../../src/events/repository')
 const db = require('../../../../db')
+afterAll(() => db.destroy())
 
 describe('makeCreateEvent()', () => {
     it('should return a function', () => {

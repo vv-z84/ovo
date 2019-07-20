@@ -1,5 +1,6 @@
 const { makeDeleteEvent } = require('../../../../src/events/repository')
 const { db } = require('../../../helpers')
+afterAll(() => db.destroy())
 
 describe('makeDeleteEvent()', () => {
     it('should return a function', () => {
@@ -12,7 +13,7 @@ describe('makeDeleteEvent()', () => {
             const deleteEvent = makeDeleteEvent(db)
             const id = await db('event').insert({ title: 'Delete', at_date: new Date(), description: 'Este evento deve ser deletado' }).returning('id')
 
-            deleteEvent(id[0])
+            await deleteEvent(id[0])
 
             const result = await db('event').where({ id: id[0] })
             expect(result.length).toBe(0)
