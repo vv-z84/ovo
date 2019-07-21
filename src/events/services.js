@@ -1,19 +1,25 @@
-const { parseISO, isBefore, isValid } = require('date-fns')
+const { parseISO, isBefore, isValid, isToday } = require('date-fns')
+const errors = require('../error')
 
 const validateEventDate = (date) => {
     const parsedDate = parseISO(date)
 
     if(!isValid(parsedDate))
-        return { error: true, value: date }
+        return { valid: false, error: new errors.InvalidDateError() }
 
+    if(isToday(parsedDate))
+        return { valid: false, error: new errors.DateIsTodayError}
+    
     if(isBefore(parsedDate, new Date()))
-        return { error: true, value: date }
+        return { valid: false, error: new errors.DateHasAlreadyPassedError() }
         
-    return { error: false, value: date }
+    return { valid: true }
 }
 
 const makeAddEvent = (createEvent, validateEventDate) => async ({ title, date, description }) => {
-    const { error, value } = validateEventDate(date)
+    const { valid, error } = validateEventDate(date)
+    if(!valid)
+        return { error, value: null }
 
     if(error)
         return { error, value }

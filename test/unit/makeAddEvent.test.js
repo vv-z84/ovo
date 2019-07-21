@@ -13,7 +13,7 @@ describe('makeAddEvent()', () => {
             })
 
             const validateEventDateMock = jest.fn((date) => {
-                return { error: false, value: date }
+                return { valid: true }
             })
 
             const addEvent = makeAddEvent(createEventMock, validateEventDateMock)
