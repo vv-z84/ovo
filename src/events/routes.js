@@ -12,6 +12,7 @@ const {
     makeCreateEvent
 } = require('./repository')
 const database = require('../../db')
+const Event = require('./event')
 
 router.get('/events', (req, res, next) => {
     if(req.query.type && req.query.type === 'today') {
@@ -40,7 +41,7 @@ router.get('/events', (req, res, next) => {
 
 router.post('/events', (req, res, next) => {
     const { title, date, description } = req.body
-    const addEvent = makeAddEvent(makeCreateEvent(database), validateEventDate)
+    const addEvent = makeAddEvent(makeCreateEvent(database, Event.validate), validateEventDate)
 
     addEvent({ title, date, description })
         .then(result => {

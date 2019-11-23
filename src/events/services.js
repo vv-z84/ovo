@@ -1,4 +1,5 @@
 const { parseISO, isBefore, isValid, isToday } = require('date-fns')
+const { Event } = require('./event')
 const errors = require('../error')
 
 const validateEventDate = (date) => {
@@ -16,18 +17,19 @@ const validateEventDate = (date) => {
     return { valid: true }
 }
 
-const makeAddEvent = (createEvent, validateEventDate) => async ({ title, date, description }) => {
-    const { valid, error } = validateEventDate(date)
-    if(!valid)
-        return { error, value: null }
+// {} -> Event 
+const makeAddEvent = (createEvent, validateEventDate) => async (event) => {
+    try {
+        const { valid, error } = validateEventDate(date)
 
-    if(error)
-        return { error, value }
+        if(!valid) throw error
 
-    const createdEvent = await createEvent({ title, date, description })
-
-    if(createdEvent)
+        const createdEvent = await createEvent(event)
         return { error: false, value: createdEvent }
+    }
+    catch(err) {
+        return { error: err }
+    }
 }
 
 const makeFindTodayEvents = (listEventsFor) => async () => {
@@ -42,11 +44,8 @@ const makeFindEvents = (listEvents) => async () => {
     return { error: false, value: events }
 }
 
-const makeDeleteEvent = (deleteEvent) => async (id) => {
-    if(id === undefined || Number.isNaN(id))
-        return { error: true, value: null }
-        
-    const result = await deleteEvent(id)
+const makeDeleteEvent = (deleteEvent) => async (event) => {
+    const result = await deleteEvent(event)
 
     return { error: false, value: result }
 }

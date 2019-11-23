@@ -13,7 +13,7 @@ describe('makeDeleteEvent()', () => {
             const deleteEvent = makeDeleteEvent(db)
             const id = await db('event').insert({ title: 'Delete', at_date: new Date(), description: 'Este evento deve ser deletado' }).returning('id')
 
-            await deleteEvent(id[0])
+            await deleteEvent({ id: id[0] })
 
             const result = await db('event').where({ id: id[0] })
             expect(result.length).toBe(0)

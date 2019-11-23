@@ -1,10 +1,16 @@
 module.exports = {
-    makeCreateEvent: (db) => async ({ title, date, description }) => {
-        const result = await db('event')
-            .returning(['id', 'title', 'at_date', 'description'])
-            .insert({ title, at_date: date, description })
+    makeCreateEvent: (db, validateEvent, mapToEvent) => async (event) => {
+        const { valid, errors } = validateEvent(event)
 
-        return result[0]
+        if(valid) {
+            const { title, date, description } = event
+            const result = await db('event')
+                .returning(['id', 'title', 'at_date', 'description'])
+                .insert({ title, at_date: date, description })
+
+            return mapToEvent(result[0])
+        }
+        throw new Error(errors[0].message)
     },
     makeListEvents: (db) => async () => {
         return await db('event')
@@ -15,7 +21,7 @@ module.exports = {
             .select()
             .where('at_date', day)
     },
-    makeDeleteEvent: (db) => async (id) => {
-        return await db('event').where('id', id).delete()
+    makeDeleteEvent: (db) => async (event) => {
+        return await db('event').where('id', event.id).delete()
     }
 }
